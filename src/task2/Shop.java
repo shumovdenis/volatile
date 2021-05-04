@@ -1,12 +1,14 @@
 package task2;
 
 import java.util.Random;
+import java.util.concurrent.atomic.LongAdder;
 
 public class Shop extends Thread{
     private final int CASHBOX_SIZE = 5;
     private final int MAX_PRICE = 10;
     private int[] cashbox = new int[CASHBOX_SIZE];
     int sum;
+    static LongAdder totalSum = new LongAdder();
 
     public int[] makeCash() {
         for (int i = 0; i < CASHBOX_SIZE; i++) {
@@ -20,6 +22,7 @@ public class Shop extends Thread{
         for (int i = 0; i < cashbox.length; i++) {
             sum += cashbox[i];
         }
+        totalSum.add(sum);
         return sum;
     }
 
@@ -30,15 +33,7 @@ public class Shop extends Thread{
         System.out.println("Сумма: " + proceeds());
     }
 
-    public int getSum() {
-        return sum;
-    }
 
-    public void print() {
-        for (int i = 0; i <= CASHBOX_SIZE - 1; i++) {
-            System.out.print(cashbox[i] + " ");
-        }
-    }
 
 
 }

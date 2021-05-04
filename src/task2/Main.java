@@ -1,11 +1,7 @@
 package task2;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.LongAdder;
-
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        LongAdder result = new LongAdder();
         Shop shop1 = new Shop();
         Shop shop2 = new Shop();
         Shop shop3 = new Shop();
@@ -22,11 +18,6 @@ public class Main {
         threadShop2.join();
         threadShop3.join();
 
-        result.add(shop1.getSum());
-        result.add(shop2.getSum());
-        result.add(shop3.getSum());
-        result.sum();
-
-        System.out.println(result);
+        System.out.println(Shop.totalSum.sum());
     }
 }
