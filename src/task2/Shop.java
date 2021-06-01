@@ -7,8 +7,8 @@ public class Shop extends Thread{
     private final static int CASHBOX_SIZE = 5;
     private final static int MAX_PRICE = 10;
     private int[] cashbox = new int[CASHBOX_SIZE];
-    private static LongAdder sum = new LongAdder();
     Report report;
+    private int checkSumShop;
 
     public Shop (Report report) {
         this.report = report;
@@ -22,17 +22,18 @@ public class Shop extends Thread{
         return cashbox;
     }
 
-    private long proceeds() {
+    private void sendDataToReport() {
         for (int i = 0; i < cashbox.length; i++) {
-            sum.add(cashbox[i]);
+            report.addCash(cashbox[i]);
+            checkSumShop += cashbox[i];
         }
-        return sum.sum();
     }
 
     @Override
     public void run() {
         makeCash();
+        sendDataToReport();
         System.out.println("Касса зкарыта у " + Thread.currentThread().getName());
-        report.addCash(proceeds());
+        System.out.println("Сумма " + checkSumShop);
     }
 }
