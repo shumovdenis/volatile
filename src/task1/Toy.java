@@ -22,7 +22,7 @@ public class Toy {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    private void setStatus(boolean status) {
         this.status = status;
     }
 }

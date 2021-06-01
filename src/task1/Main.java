@@ -1,7 +1,7 @@
 package task1;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Toy toy = new Toy();
         TurnUp turnUp = new TurnUp(toy);
         TurnDown turnDown = new TurnDown(toy);
@@ -10,7 +10,7 @@ public class Main {
         Thread down = new Thread(null, turnDown, "2");
 
 
-        up.start();
+        up.join();
         down.setDaemon(true);
         down.start();
     }
